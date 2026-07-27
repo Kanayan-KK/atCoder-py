@@ -1,17 +1,15 @@
-import os
-import sys
-from pathlib import Path
+from itertools import permutations
 
 
 def main() -> None:
-    # F5デバッグ時は指定サンプル、それ以外は標準入力を読み取る
-    input_file = os.getenv("ATCODER_INPUT_FILE")
-    source = Path(input_file).read_text(encoding="utf-8") if input_file else sys.stdin.read()
-    values = source.split()
+    N = int(input())
+    P = list(map(int, input().split()))
+    Q = list(map(int, input().split()))
+    count = 0
+    for a in permutations([i + 1 for i in range(N)]):
+        count += P < list(a) < Q
 
-    # ここに解答を実装する
-    _ = values
-
+    print(count)
 
 if __name__ == "__main__":
     main()
