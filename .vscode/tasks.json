@@ -40,12 +40,29 @@
         "Bypass",
         "-File",
         "${workspaceFolder}\\scripts\\test-samples.ps1",
-        "${input:problem}"
+        "${input:problem}",
+        "-Runtime",
+        "${input:runtime}"
       ],
-      "problemMatcher": []
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
     }
   ],
   "inputs": [
+    {
+      "id": "runtime",
+      "type": "pickString",
+      "description": "実行するPython処理系",
+      "options": [
+        "CPython",
+        "PyPy"
+      ],
+      "default": "CPython"
+    },
     {
       "id": "problem",
       "type": "promptString",

@@ -1,6 +1,7 @@
 # AtCoder Python環境
 
-AtCoderの`Python (PyPy 3.11-v7.3.20)`に合わせた作業環境です。
+AtCoderの`Python (CPython 3.13.7)`を既定にした作業環境です。
+必要な問題では`Python (PyPy 3.11-v7.3.20)`も選べます。
 各問題の解答と公式サンプルを`problems`にまとめています。
 
 ## 初回準備
@@ -11,8 +12,9 @@ PowerShellで次を実行します。
 .\scripts\setup.ps1
 ```
 
-`uv`がPyPy 3.11を取得し、`.venv`と開発用の`ruff`を準備します。
-スクリプトではAtCoderと同じPyPyビルド`7.3.20`を指定しています。
+`uv`が既定のCPython環境`.venv`と、選択実行用のPyPy環境`.venv-pypy`を準備します。
+CPythonは`3.13.7`、PyPyはAtCoderと同じビルド`7.3.20`です。
+開発用の`ruff`は既定のCPython環境へ導入します。
 
 ## ABC468を解く
 
@@ -29,6 +31,12 @@ A問題のサンプルテスト:
 
 ```powershell
 .\scripts\test-samples.ps1 problems/ABC468/abc468-a
+```
+
+PyPyで実行する場合:
+
+```powershell
+.\scripts\test-samples.ps1 problems/ABC468/abc468-a -Runtime PyPy
 ```
 
 解答前の空テンプレートは出力しないため、サンプルテストは`NG`になります。
@@ -49,9 +57,11 @@ uv run python -m unittest
 
 1. デバッグする問題の`Main.py`にブレークポイントを置く
 2. `F5`を押す
-3. 問題ディレクトリとサンプル番号を入力する
+3. CPythonまたはPyPyのデバッグ構成を選ぶ
+4. 問題ディレクトリとサンプル番号を入力する
 
-指定した問題の`Main.py`が`.venv`のPyPyで実行され、サンプルが自動入力されます。
+既定は`.venv`のCPythonです。
+PyPy構成を選ぶと`.venv-pypy`で実行され、どちらもサンプルが自動入力されます。
 VS Codeには推奨拡張のPython、Python Debugger、Ruffを入れてください。
 
 ## 新しい問題を追加する

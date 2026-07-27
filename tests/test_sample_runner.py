@@ -21,7 +21,7 @@ class SampleRunnerTest(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn("OK 01", result.stdout)
+        self.assertIn("判定：OK", result.stdout)
 
     def test_debug_runner_connects_sample_to_stdin(self) -> None:
         # input()と同じ標準入力経路へサンプルを接続
