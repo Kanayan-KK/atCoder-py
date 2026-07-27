@@ -1,17 +1,24 @@
-import os
-import sys
-from pathlib import Path
+s = input()
+n = len(s)
+answer = 0
 
+for is_even in range(2):
+    for center_right in range(n):
+        left = center_right - is_even
+        right = center_right
+        mismatch_count = 0
 
-def main() -> None:
-    # F5デバッグ時は指定サンプル、それ以外は標準入力を読み取る
-    input_file = os.getenv("ATCODER_INPUT_FILE")
-    source = Path(input_file).read_text(encoding="utf-8") if input_file else sys.stdin.read()
-    values = source.split()
+        while 0 <= left and right < n:
+            a = s[left]
+            b = s[right]
+            if a != b:
+                mismatch_count += 1
 
-    # ここに解答を実装する
-    _ = values
+            if mismatch_count == 2:
+                break
 
+            answer += 1
+            left -= 1
+            right += 1
 
-if __name__ == "__main__":
-    main()
+print(answer)
