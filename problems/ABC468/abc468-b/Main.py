@@ -1,16 +1,13 @@
-import os
-import sys
-from pathlib import Path
-
-
 def main() -> None:
-    # F5デバッグ時は指定サンプル、それ以外は標準入力を読み取る
-    input_file = os.getenv("ATCODER_INPUT_FILE")
-    source = Path(input_file).read_text(encoding="utf-8") if input_file else sys.stdin.read()
-    values = source.split()
+    [m, d] = list(map(int, input().split()))
+    s = input()
+    sList = list(s)
+    count = 0
+    for i in range(len(s)):
+        if "G" not in sList[max(0, i - d) : min(m, i + d + 1)]:
+            count += 1
 
-    # ここに解答を実装する
-    _ = values
+    print(count)
 
 
 if __name__ == "__main__":
