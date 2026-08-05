@@ -1,10 +1,18 @@
-# from collections import deque
-# from collections import Counter
-# from itertools import combinations
-# from itertools import permutations
-# from itertools import accumulate
-# from math import gcd, lcm
-# from math import sqrt
-# from math import factorial
-# from math import comb
-# from math import perm
+N = int(input())
+Points = list()
+Ans = 0
+for _i in range(N):
+    x, y = map(int, input().split())
+    Points.append([x, y])
+
+# x座標でソート
+Points.sort()
+# print(Points)
+
+minY = N + 1
+for _x, y in Points:
+    # 最小値更新
+    if y < minY:
+        minY = y
+        Ans += 1
+print(Ans)
