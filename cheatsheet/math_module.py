@@ -1,5 +1,12 @@
 import math
 
+# 絶対値を求める
+print(abs(-10))  # 10
+print(abs(3 - 8))  # 2つの値の差: 5
+
+# math.fabs()でも求められるが、結果は常にfloatになる
+print(math.fabs(-10))  # 10.0
+
 # 小数を整数方向に丸める
 print(math.floor(3.8))  # 切り下げ: 3
 print(math.ceil(3.2))  # 切り上げ: 4
