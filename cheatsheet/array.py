@@ -7,6 +7,11 @@ numbers[0] = 5
 print(numbers)  # [5, 20, 20, 30]
 print(numbers[1])  # 20
 
+# インデックス1から3までを0に更新（終了位置の4は含まない）
+range_values = [10, 20, 30, 40, 50]
+range_values[1:4] = [0] * 3
+print(range_values)  # [10, 0, 0, 0, 50]
+
 # list.pop(): 位置を省略すると末尾から取り出す
 list_items = ["A", "B", "C"]
 print(list_items.pop())  # C
