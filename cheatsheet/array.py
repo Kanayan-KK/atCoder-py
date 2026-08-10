@@ -7,10 +7,66 @@ numbers[0] = 5
 print(numbers)  # [5, 20, 20, 30]
 print(numbers[1])  # 20
 
-# インデックス1から3までを0に更新（終了位置の4は含まない）
+# 一次元配列を初期化する
+empty_values = []
+zero_values = [0] * 5
+index_values = list(range(5))
+square_values = [index**2 for index in range(5)]
+print(empty_values)  # []
+print(zero_values)  # [0, 0, 0, 0, 0]
+print(index_values)  # [0, 1, 2, 3, 4]
+print(square_values)  # [0, 1, 4, 9, 16]
+
+# 二次元配列は行ごとに別のlistを作る
+rows = 3
+columns = 4
+grid = [[0] * columns for _ in range(rows)]
+grid[0][1] = 9
+print(grid)  # [[0, 9, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+# [[0] * columns] * rowsでは同じ行が共有されるため使わない
+shared_grid = [[0] * columns] * rows
+shared_grid[0][1] = 9
+print(shared_grid)  # [[0, 9, 0, 0], [0, 9, 0, 0], [0, 9, 0, 0]]
+
+# 初期化の使い分け
+# 空のlist: []
+# 同じ値を並べる: [value] * length
+# 連番を作る: list(range(length))
+# 値を計算して作る: [expression for ...]
+# 二次元配列: [[value] * columns for _ in range(rows)]
+
+# スライス: list[開始位置:終了位置:ステップ]
+# 開始位置は含み、終了位置は含まない
+slice_values = [0, 1, 2, 3, 4, 5, 6]
+print(slice_values[1:4])  # [1, 2, 3]
+print(slice_values[:3])  # [0, 1, 2]（先頭から）
+print(slice_values[4:])  # [4, 5, 6]（末尾まで）
+print(slice_values[1:6:2])  # [1, 3, 5]（2個おき）
+print(slice_values[::-1])  # [6, 5, 4, 3, 2, 1, 0]（逆順）
+print(slice_values[-3:])  # [4, 5, 6]（末尾から3個）
+print(slice_values[4:100])  # [4, 5, 6]（範囲外でもエラーにならない）
+
+# [:]でlistをコピーする
+copied_values = slice_values[:]
+copied_values[0] = 99
+print(slice_values)  # [0, 1, 2, 3, 4, 5, 6]（元のlistは変わらない）
+print(copied_values)  # [99, 1, 2, 3, 4, 5, 6]
+
+# スライス代入で指定範囲をまとめて更新する
 range_values = [10, 20, 30, 40, 50]
 range_values[1:4] = [0] * 3
 print(range_values)  # [10, 0, 0, 0, 50]
+
+# スライス代入では要素数を変えられる
+range_values[1:4] = [99]
+print(range_values)  # [10, 99, 50]
+
+# 使い分け
+# 一部分を取得: values[start:stop]
+# 一定間隔で取得: values[start:stop:step]
+# 逆順の新しいlistを作る: values[::-1]
+# 指定範囲をまとめて更新: values[start:stop] = new_values
 
 # list.pop(): 位置を省略すると末尾から取り出す
 list_items = ["A", "B", "C"]
