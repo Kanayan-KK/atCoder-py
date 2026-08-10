@@ -83,9 +83,37 @@ print(mixed.lower())  # python
 print(mixed.upper())  # PYTHON
 print(mixed.lower() == "python")  # True
 
+# 文字の種類を判別する（1文字だけでなく、全ての文字を調べる）
+print("123".isdigit())  # True: 全て数字
+print("12a".isdigit())  # False
+print("abc".isalpha())  # True: 全て英字などの文字
+print("abc123".isalnum())  # True: 全て文字または数字
+print(" \t\n".isspace())  # True: 全て空白文字
+print("ABC".isupper())  # True: 大文字のある文字が全て大文字
+print("abc".islower())  # True: 小文字のある文字が全て小文字
+print("abc123".isascii())  # True: 全てASCII文字
+
+# 空文字では、上記の判定はisascii()を除いてFalseになる
+print("".isdigit())  # False
+print("".isascii())  # True
+
+# isdigit()は符号や小数点を数字とは判定しない
+print("-123".isdigit())  # False
+print("1.5".isdigit())  # False
+print("-123".lstrip("+-").isdigit())  # True: 先頭の符号を除いて判定
+
+# 0～9だけに限定したい場合（isdigit()は一部のUnicode数字もTrue）
+print("１２３".isdigit())  # True: 全角数字
+print("１２３".isascii() and "１２３".isdigit())  # False
+print("123".isascii() and "123".isdigit())  # True
+
 # 使い分け
 # 最初の位置を知る: find()
 # 最後の位置を知る: rfind()
 # 存在だけを知る: in
 # 見つからない場合を例外にしたい: index()
 # すべての位置を知る: find()を開始位置を変えながら繰り返す
+# 数字だけか調べる: isdigit()
+# 文字だけか調べる: isalpha()
+# 文字または数字だけか調べる: isalnum()
+# 半角の0～9だけか調べる: isascii() and isdigit()
