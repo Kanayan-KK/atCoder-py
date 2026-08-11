@@ -1,5 +1,21 @@
 import math
 
+# /は通常の割り算、//は小数部分を切り下げた商を求める
+print(7 / 3)  # 2.333...: 結果はfloat
+print(7 // 3)  # 2: 結果はint
+
+# //は負の無限大方向へ切り下げる。0方向への切り捨てではない
+print(-7 // 3)  # -3
+print(int(-7 / 3))  # -2: int()は0方向へ切り捨てる
+
+# 商と余りを同時に使うならdivmod()を選ぶ
+quotient, remainder = divmod(7, 3)
+print(quotient, remainder)  # 2 1
+
+# 正の整数aを正の整数b個ずつに分けるときの必要個数（切り上げ除算）
+a, b = 7, 3
+print((a + b - 1) // b)  # 3
+
 # 絶対値を求める
 print(abs(-10))  # 10
 print(abs(3 - 8))  # 2つの値の差: 5
