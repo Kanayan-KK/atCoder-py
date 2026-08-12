@@ -36,38 +36,6 @@ print(shared_grid)  # [[0, 9, 0, 0], [0, 9, 0, 0], [0, 9, 0, 0]]
 # 値を計算して作る: [expression for ...]
 # 二次元配列: [[value] * columns for _ in range(rows)]
 
-# スライス: list[開始位置:終了位置:ステップ]
-# 開始位置は含み、終了位置は含まない
-slice_values = [0, 1, 2, 3, 4, 5, 6]
-print(slice_values[1:4])  # [1, 2, 3]
-print(slice_values[:3])  # [0, 1, 2]（先頭から）
-print(slice_values[4:])  # [4, 5, 6]（末尾まで）
-print(slice_values[1:6:2])  # [1, 3, 5]（2個おき）
-print(slice_values[::-1])  # [6, 5, 4, 3, 2, 1, 0]（逆順）
-print(slice_values[-3:])  # [4, 5, 6]（末尾から3個）
-print(slice_values[4:100])  # [4, 5, 6]（範囲外でもエラーにならない）
-
-# [:]でlistをコピーする
-copied_values = slice_values[:]
-copied_values[0] = 99
-print(slice_values)  # [0, 1, 2, 3, 4, 5, 6]（元のlistは変わらない）
-print(copied_values)  # [99, 1, 2, 3, 4, 5, 6]
-
-# スライス代入で指定範囲をまとめて更新する
-range_values = [10, 20, 30, 40, 50]
-range_values[1:4] = [0] * 3
-print(range_values)  # [10, 0, 0, 0, 50]
-
-# スライス代入では要素数を変えられる
-range_values[1:4] = [99]
-print(range_values)  # [10, 99, 50]
-
-# 使い分け
-# 一部分を取得: values[start:stop]
-# 一定間隔で取得: values[start:stop:step]
-# 逆順の新しいlistを作る: values[::-1]
-# 指定範囲をまとめて更新: values[start:stop] = new_values
-
 # list.pop(): 位置を省略すると末尾から取り出す
 list_items = ["A", "B", "C"]
 print(list_items.pop())  # C
