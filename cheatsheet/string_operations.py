@@ -67,9 +67,17 @@ colors = csv_text.split(",")
 print(colors)  # ['red', 'blue', 'green']
 print("-".join(colors))  # red-blue-green
 
-# strip(): 先頭と末尾の空白や改行を取り除く
-input_text = "  hello\n"
-print(input_text.strip())  # hello
+# strip(): 先頭と末尾の余分な空白を取り除く（Trimに相当）
+input_text = " \t hello world \n"
+print(input_text.strip())  # hello world
+
+# lstrip()は先頭だけ、rstrip()は末尾だけを取り除く
+print(input_text.lstrip())  # 末尾側の空白と改行は残る
+print(input_text.rstrip())  # 先頭側の空白とタブは残る
+
+# 文字列の途中にある空白は取り除かない
+spaced_text = "  hello   world  "
+print(spaced_text.strip())  # hello   world
 
 # スライス: 開始位置以上、終了位置未満の部分文字列を取得する
 word = "Python"
