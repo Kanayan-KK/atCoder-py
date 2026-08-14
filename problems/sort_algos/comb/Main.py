@@ -13,6 +13,7 @@ numbers = list(map(int, input().split()))
 n = len(numbers)
 
 # 間隔
+# float > int 型変換で小数点以下を切り捨て
 h = int(n / 1.3)
 
 # 入れ替え発生フラグ
