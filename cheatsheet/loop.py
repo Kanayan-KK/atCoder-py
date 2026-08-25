@@ -29,6 +29,24 @@ while count > 0:
     print(count)  # 3, 2, 1
     count -= 1  # 更新を忘れると無限ループになる
 
+# 終了回数が事前に分からない場合はwhile Trueとbreakを使う
+values = [3, 8, -1, 5]
+index = 0
+while True:
+    value = values[index]
+    if value == -1:
+        break
+    print(value)  # 3, 8
+    index += 1
+
+# continueの前に条件変数を更新する
+number = 0
+while number < 5:
+    number += 1
+    if number % 2 == 0:
+        continue
+    print(number)  # 1, 3, 5
+
 # continue: 条件に合う回だけ残りの処理を飛ばす
 for number in range(5):
     if number % 2 == 0:
@@ -50,5 +68,6 @@ for row in range(2):
 # 使い分け
 # 要素や決まった回数を順番に処理する: for
 # 条件を満たす間だけ繰り返す: while
+# 終了条件をループ内で判定する: while Trueとbreak
 # インデックスも必要: enumerate()
 # 複数の列を同時に処理する: zip()
