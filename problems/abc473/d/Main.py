@@ -1,19 +1,19 @@
 # from itertools import permutations
 
-n, k = map(int, input().split())
-stack = [0 for i in range(n)]
+# n, k = map(int, input().split())
+# stack = [0 for i in range(n)]
 
-def dfs (stack:list[int]):
-    result = 0
-    for i,num in enumerate(stack):
-        result += (i+1) * num
-    if result == n:
-        print(" ".join(map(str,stack)))
+# def dfs (stack:list[int]):
+#     result = 0
+#     for i,num in enumerate(stack):
+#         result += (i+1) * num
+#     if result == n:
+#         print(" ".join(map(str,stack)))
 
-    for x in range(k):
-        stack.app
+#     for x in range(k):
+#         stack.app
 
-dfs(stack)
+# dfs(stack)
 # coms = list(permutations(range(k + 1), n))
 
 # for com in coms:
