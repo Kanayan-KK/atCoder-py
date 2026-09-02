@@ -3,7 +3,9 @@ name = "atcoder-py"
 version = "1.0.0"
 description = "AtCoder Python workspace"
 requires-python = ">=3.11,<3.14"
-dependencies = []
+dependencies = [
+    "numpy>=2.4.6",
+]
 
 [dependency-groups]
 dev = [
@@ -17,3 +19,7 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
