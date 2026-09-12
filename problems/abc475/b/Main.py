@@ -1,3 +1,13 @@
+N=int(input())
+A=list(map(int,input().split()))
+c100,c10,c1=0,0,0
+for a in A:
+  x=(-a)%1000
+  c100+=x//100
+  c10+=x//10%10
+  c1+=x%10
+print(c1,c10,c100)
+
 # n = int(input())
 # amounts = list(map(int, input().split()))
 # sen_in_w = 10 ^ 100
