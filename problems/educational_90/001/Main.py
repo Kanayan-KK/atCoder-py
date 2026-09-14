@@ -23,3 +23,29 @@
 #
 # 【サンプルテスト】解答を書いた後、リポジトリのルートで実行する。
 # .\scripts\test-samples.ps1 problems/kyopro_educational_90/001
+N, L = map(int, input().split())
+K = int(input())
+points = list(map(int, input().split()))
+
+
+def check(x: int):
+    cut_count = 0
+    pre_point = 0
+    for i in range(N):
+        if points[i] - pre_point >= x:
+            cut_count += 1
+            pre_point = points[i]
+
+    if L - pre_point >= x:
+        cut_count += 1
+    return cut_count >= K + 1
+
+
+left, right = -1, L + 1
+while right - left > 1:
+    mid = (left + right) // 2
+    if check(mid):
+        left = mid
+    else:
+        right = mid
+print(left)
