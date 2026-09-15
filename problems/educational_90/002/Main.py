@@ -24,3 +24,35 @@
 #
 # 【サンプルテスト】解答を書いた後、リポジトリのルートで実行する。
 # .\scripts\test-samples.ps1 problems/educational_90/002
+# from itertools import permutations
+from itertools import product
+
+N = int(input())
+circle_count = N // 2
+if N % 2 == 1:
+    exit()
+# strings = ["("] * (N // 2) + [")"] * (N // 2)
+# pairs = set(permutations(strings, N))
+pairs = product("()", repeat=N)
+
+for pair in pairs:
+    # mid = len(pair) // 2
+    # left = pair[:mid]
+    # right = pair[mid:]
+    pair_s = "".join(pair)
+
+    count = 0
+    is_correct = True
+
+    for c in pair:
+        if c == "(":
+            count += 1
+        else:
+            count -= 1
+
+        if count < 0:
+            is_correct = False
+            break
+
+    if is_correct and count == 0:
+        print("".join(pair))
