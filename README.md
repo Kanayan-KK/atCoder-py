@@ -16,23 +16,6 @@ PowerShellで次を実行します。
 CPythonは`3.13.7`、PyPyはAtCoderと同じビルド`7.3.20`です。
 NumPyと、開発用の`ruff`、`pyright`は既定のCPython環境へ導入します。
 
-## チートシートを追加する
-
-Pythonのチートシートは`cheatsheet`に追加します。
-追加・変更後は、対象ファイルの実行、Ruff、Pyright、空白エラーを確認します。
-NumPyの基本操作は`cheatsheet/numpy_operations.py`で確認できます。
-
-例として`cheatsheet/dfs.py`を検証する場合:
-
-```powershell
-& .\.venv\Scripts\python.exe cheatsheet/dfs.py
-& .\.venv\Scripts\ruff.exe check cheatsheet/dfs.py
-& .\.venv\Scripts\pyright.exe cheatsheet/dfs.py
-git diff --check -- cheatsheet/dfs.py
-```
-
-VS CodeのPylanceによる型診断は、CLIでは基盤となるPyrightで検証します。
-
 ## ABC468を解く
 
 例としてA問題は`problems/ABC468/abc468-a/Main.py`を編集します。

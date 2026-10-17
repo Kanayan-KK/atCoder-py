@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bit 全探索 | Python チートシート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design-system/document.css">
+<script src="./design-system/math-copy.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<style>
+.bit-demo svg { display: block; width: 100%; height: auto; }
+.bit-demo input { width: min(100%, 360px); vertical-align: middle; }
+</style>
+</head>
+<body>
+<div class="mb-page">
+<div class="mb-hero">
+<header class="mb-header"><h1>bit 全探索</h1></header>
+<p class="mb-lede">各要素を「選ぶ・選ばない」の 2 通りに分けて、すべての組合せを調べます。Python では <code>range(1 &lt;&lt; n)</code> と <code>bit &amp; (1 &lt;&lt; i)</code> が基本形です。</p>
+<nav class="mb-toc" aria-label="目次"><ol>
+<li><a href="#idea">使う場面と仕組み</a></li>
+<li><a href="#template">基本形</a></li>
+<li><a href="#example">実例：部分和を調べる</a></li>
+<li><a href="#reference">演算早見表</a></li>
+<li><a href="#limits">計算量と注意点</a></li>
+</ol></nav>
+<div class="mb-summary"><ul>
+<li>要素が n 個なら、選び方は空集合を含めて 2ⁿ 通りです。</li>
+<li>右端のビットが、添字 0 の要素に対応します。</li>
+<li>各選び方で n 個の要素を確認する基本形の計算量は O(n × 2ⁿ) です。</li>
+</ul></div>
+</div>
+<div class="mb-wrap"><main class="mb-main">
+<h2 id="idea">使う場面と仕組み</h2>
+<p>bit（ビット）は 0 または 1 の値です。bit 全探索は、各ビットを要素の選択状態として使う全探索です。ビットが 1 ならその要素を選び、0 なら選びません。選択状態をまとめた整数を、ここでは <code>bit</code> と呼びます。</p>
+<p>この方法は、少数の品物から条件に合う組合せを探す問題で使えます。選ぶ順序は区別せず、各要素は最大 1 回だけ選びます。</p>
+<figure class="mb-figure bit-demo">
+<div class="mb-figure-frame">
+<label for="bit">bit を変更：<input id="bit" type="range" min="0" max="7" value="5"></label>
+<svg viewBox="0 0 540 205" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">3 ビットと要素の対応</title>
+<desc id="diagram-description">左から添字 2、1、0 の順です。bit が 5 のとき、2 進数は 101 で、添字 0 と 2 を選びます。</desc>
+<g fill="white" stroke="#111110" stroke-width="1.5">
+<rect x="35" y="40" width="130" height="65" rx="10"/>
+<rect x="205" y="40" width="130" height="65" rx="10"/>
+<rect x="375" y="40" width="130" height="65" rx="10"/>
+<path d="M100 105V140 M270 105V140 M440 105V140"/>
+</g>
+<g text-anchor="middle" fill="#111110" font-size="18">
+<text x="100" y="26">i = 2</text><text x="270" y="26">i = 1</text><text x="440" y="26">i = 0（右端）</text>
+<text id="bit2" x="100" y="82" font-size="32">1</text>
+<text id="bit1" x="270" y="82" font-size="32">0</text>
+<text id="bit0" x="440" y="82" font-size="32">1</text>
+<text x="100" y="170">a[2] = 7</text><text x="270" y="170">a[1] = 4</text><text x="440" y="170">a[0] = 3</text>
+</g>
+</svg>
+<p id="selection" role="status">bit = 5 / 2 進数 = 101 / 選ぶ値 = [3, 7] / 合計 = 10</p>
+</div>
+<figcaption>図 1：右端のビットから、配列の先頭の要素を対応させます。</figcaption>
+</figure>
+<h2 id="template">基本形</h2>
+<pre><code class="language-python">a = [3, 4, 7]
+n = len(a)
+
+# すべての選択状態を列挙する
+for bit in range(1 &lt;&lt; n):
+    selected = []
+    for i in range(n):
+        # i 番目のビットが 1 なら、その要素を選ぶ
+        if bit &amp; (1 &lt;&lt; i):
+            selected.append(a[i])
+    print(f"{bit:0{n}b}", selected)
+</code></pre>
+<details><summary>実行結果を確認する</summary>
+<pre><code class="language-plaintext">000 []
+001 [3]
+010 [4]
+011 [3, 4]
+100 [7]
+101 [3, 7]
+110 [4, 7]
+111 [3, 4, 7]</code></pre>
+</details>
+<p><code>1 &lt;&lt; n</code> は 2ⁿ です。<code>range</code> の終端は含まれないため、bit は 0 から 2ⁿ − 1 まで動きます。<code>bit &amp; (1 &lt;&lt; i)</code> はビットが立っていれば 0 以外になります。Python の <code>if</code> は、その値を真として扱います。</p>
+<h2 id="example">実例：部分和を調べる</h2>
+<p>配列から要素を選び、合計を 10 にできるか調べます。各要素は最大 1 回だけ使えます。答えが見つかったら、外側のループを終了します。</p>
+<pre><code class="language-python">a = [3, 4, 7]
+target = 10
+n = len(a)
+found = False
+
+# 選んだ要素の合計を求める
+for bit in range(1 &lt;&lt; n):
+    total = 0
+    for i in range(n):
+        if bit &amp; (1 &lt;&lt; i):
+            total += a[i]
+
+    # 条件を満たす選び方が見つかったら探索を終える
+    if total == target:
+        found = True
+        break
+
+print("Yes" if found else "No")  # Yes（3 + 7 = 10）
+</code></pre>
+<p>合計だけを使う場合は、選んだ要素のリストを作る必要はありません。負の値が含まれていても、この全探索は動作します。</p>
+<h2 id="reference">演算早見表</h2>
+<table>
+<thead><tr><th>目的</th><th>Python の式</th><th>結果・意味</th></tr></thead>
+<tbody>
+<tr><td class="mb-rowlabel">選び方の総数</td><td><code>1 &lt;&lt; n</code></td><td>2ⁿ</td></tr>
+<tr><td class="mb-rowlabel">選択状態の列挙</td><td><code>range(1 &lt;&lt; n)</code></td><td>空集合を含む全組合せ</td></tr>
+<tr><td class="mb-rowlabel">要素 i の選択判定</td><td><code>bit &amp; (1 &lt;&lt; i)</code></td><td>選択時は 0 以外</td></tr>
+<tr><td class="mb-rowlabel">同じ判定の別表現</td><td><code>(bit &gt;&gt; i) &amp; 1</code></td><td>選択時は 1、未選択時は 0</td></tr>
+<tr><td class="mb-rowlabel">選んだ要素数</td><td><code>bit.bit_count()</code></td><td>1 のビットの個数</td></tr>
+<tr><td class="mb-rowlabel">空集合の除外</td><td><code>range(1, 1 &lt;&lt; n)</code></td><td>bit = 0 を除外</td></tr>
+</tbody>
+</table>
+<h2 id="limits">計算量と注意点</h2>
+<p>基本形は 2ⁿ 通りそれぞれで n 個の要素を確認します。時間計算量は O(n × 2ⁿ)、選んだ要素を格納する追加の記憶量は O(n) です。部分和の例のように合計だけを保持する場合、追加の記憶量は O(1) です。これらは整数演算を定数時間とみなした目安です。</p>
+<table>
+<thead><tr><th>要素数 n</th><th>選び方 2ⁿ</th><th>ビットを確認する回数 n × 2ⁿ</th></tr></thead>
+<tbody>
+<tr><td class="mb-rowlabel">15</td><td>32,768</td><td>491,520</td></tr>
+<tr><td class="mb-rowlabel">20</td><td>1,048,576</td><td>20,971,520</td></tr>
+<tr><td class="mb-rowlabel">25</td><td>33,554,432</td><td>838,860,800</td></tr>
+</tbody>
+</table>
+<p>n = 20 付近でも、Python の実行時間は内側の処理と制限時間に左右されます。n が 1 増えるだけで選び方は 2 倍になるため、制約から実行可能性を判断します。</p>
+<ul>
+<li><strong>判定式を 1 と比較しません。</strong> <code>bit &amp; (1 &lt;&lt; i)</code> の結果は、選択時に 1、2、4 などになります。</li>
+<li><strong>空集合の合計は 0 です。</strong> target が 0 の場合、部分和の例は空集合でも Yes になります。1 個以上選ぶ条件がある場合は bit = 0 を除きます。</li>
+<li><strong>同じ値でも添字が違えば別の要素です。</strong> <code>[3, 3]</code> には 4 通りの選び方があります。値の一覧としては同じ結果が現れます。</li>
+<li><strong>n = 0 の場合も 1 通りです。</strong> <code>range(1 &lt;&lt; 0)</code> は bit = 0 だけを列挙します。</li>
+<li><strong>用途に応じて列挙方法を選びます。</strong> 個数を k 個に固定するなら <code>itertools.combinations</code>、順序を区別するなら <code>itertools.permutations</code>、各要素に 3 通り以上の選択肢があるなら <code>itertools.product</code> も候補になります。</li>
+</ul>
+<p>関連する実行用の例：<a href="./bit_mask.py">bit_mask.py</a>、<a href="./combinations.py">combinations.py</a>、<a href="./product.py">product.py</a>。</p>
+</main></div>
+</div>
+<script>
+// 選択した整数から、図と選択結果を更新する
+const slider = document.getElementById("bit");
+const values = [3, 4, 7];
+function updateSelection() {
+    const bit = Number(slider.value);
+    const selected = values.filter((_, i) => bit & (1 << i));
+    values.forEach((_, i) => {
+        document.getElementById(`bit${i}`).textContent = (bit >> i) & 1;
+    });
+    document.getElementById("selection").textContent =
+        `bit = ${bit} / 2 進数 = ${bit.toString(2).padStart(3, "0")} / ` +
+        `選ぶ値 = [${selected.join(", ")}] / 合計 = ${selected.reduce((sum, v) => sum + v, 0)}`;
+}
+slider.addEventListener("input", updateSelection);
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.hljs) hljs.highlightAll();
+});
+</script>
+</body>
+</html>
