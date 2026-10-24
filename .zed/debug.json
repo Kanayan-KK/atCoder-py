@@ -5,12 +5,16 @@
     "request": "launch",
     "program": "$ZED_WORKTREE_ROOT/scripts/debug_problem.py",
     "args": [
-      "--interactive"
+      "--interactive",
+      "${ZED_FILE:}"
     ],
     "cwd": "$ZED_WORKTREE_ROOT",
     "python": "$ZED_WORKTREE_ROOT/.venv-pypy/Scripts/python.exe",
     "console": "integratedTerminal",
-    "stopOnEntry": false
+    "stopOnEntry": false,
+    "env": {
+      "PYTHONIOENCODING": "cp932"
+    }
   },
   {
     "label": "AtCoder: CPythonでデバッグ",
@@ -18,11 +22,15 @@
     "request": "launch",
     "program": "$ZED_WORKTREE_ROOT/scripts/debug_problem.py",
     "args": [
-      "--interactive"
+      "--interactive",
+      "${ZED_FILE:}"
     ],
     "cwd": "$ZED_WORKTREE_ROOT",
     "python": "$ZED_WORKTREE_ROOT/.venv/Scripts/python.exe",
     "console": "integratedTerminal",
-    "stopOnEntry": false
+    "stopOnEntry": false,
+    "env": {
+      "PYTHONIOENCODING": "cp932"
+    }
   }
 ]

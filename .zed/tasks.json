@@ -32,7 +32,9 @@
       "-ExecutionPolicy",
       "Bypass",
       "-File",
-      "$ZED_WORKTREE_ROOT/scripts/zed-test-samples.ps1"
+      "$ZED_WORKTREE_ROOT/scripts/zed-test-samples.ps1",
+      "-ActiveFile",
+      "${ZED_FILE:}"
     ],
     "cwd": "$ZED_WORKTREE_ROOT",
     "save": "all"

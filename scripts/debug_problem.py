@@ -8,10 +8,19 @@ from pathlib import Path
 
 def main() -> None:
     # Zedではターミナルで問題とサンプルを選択
-    interactive = sys.argv[1:] == ["--interactive"]
+    interactive = sys.argv[1:2] == ["--interactive"]
     if interactive:
         root = Path(__file__).resolve().parents[1]
-        problem = input("問題ディレクトリ (リポジトリのルートからの相対パス): ").strip()
+        # 開いているMain.pyがあれば、その親ディレクトリを初期値として表示
+        default_problem = ""
+        if len(sys.argv) == 3:
+            active_file = Path(sys.argv[2]).resolve()
+            if active_file.name == "Main.py" and active_file.is_file():
+                default_problem = os.path.relpath(active_file.parent, root)
+        default_label = f" [{default_problem}]" if default_problem else ""
+        problem = input(
+            f"問題ディレクトリ (リポジトリのルートからの相対パス){default_label}: "
+        ).strip() or default_problem
         if not problem:
             raise SystemExit("問題ディレクトリを入力してください。")
         sample_number = input("サンプル番号 [01]: ").strip() or "01"

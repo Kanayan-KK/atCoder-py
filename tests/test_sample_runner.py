@@ -73,13 +73,18 @@ class SampleRunnerTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("selected\nworking directory", result.stdout)
 
-    def test_interactive_debug_defaults_to_first_sample(self) -> None:
+    def test_interactive_debug_defaults_to_active_file_and_first_sample(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        # 開いているファイルに依存せず、ルートからの相対パスと空欄の番号を解決
+        # 開いているMain.pyと空欄のサンプル番号で初期値を使用
         result = subprocess.run(
-            [sys.executable, str(root / "scripts" / "debug_problem.py"), "--interactive"],
+            [
+                sys.executable,
+                str(root / "scripts" / "debug_problem.py"),
+                "--interactive",
+                str(root / "tests" / "fixtures" / "sample-runner" / "Main.py"),
+            ],
             cwd=root / "tests",
-            input="tests/fixtures/sample-runner\n\n",
+            input="\n\n",
             capture_output=True,
             text=True,
             check=False,

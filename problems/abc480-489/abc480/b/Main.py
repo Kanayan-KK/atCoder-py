@@ -1,5 +1,5 @@
 N, M = map(int, input().split())
-names = []
+names:list[str] = []
 for _i in range(N):
-    names.append(str(input()))
+    names.append(input())
 

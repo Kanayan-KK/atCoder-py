@@ -14,7 +14,8 @@
       "console": "integratedTerminal",
       "stopOnEntry": false,
       "env": {
-        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in"
+        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in",
+        "PYTHONIOENCODING": "cp932"
       }
     },
     {
@@ -30,7 +31,8 @@
       "console": "integratedTerminal",
       "stopOnEntry": false,
       "env": {
-        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in"
+        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in",
+        "PYTHONIOENCODING": "cp932"
       }
     }
   ],
