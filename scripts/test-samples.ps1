@@ -3,7 +3,7 @@ param(
     [string]$Problem,
 
     [ValidateSet("CPython", "PyPy")]
-    [string]$Runtime = "CPython"
+    [string]$Runtime = "PyPy"
 )
 
 $ErrorActionPreference = "Stop"

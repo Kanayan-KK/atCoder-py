@@ -61,7 +61,7 @@
         "CPython",
         "PyPy"
       ],
-      "default": "CPython"
+      "default": "PyPy"
     },
     {
       "id": "problem",

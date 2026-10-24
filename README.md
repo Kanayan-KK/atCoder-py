@@ -1,7 +1,7 @@
 # AtCoder Python環境
 
-AtCoderの`Python (CPython 3.13.7)`を既定にした作業環境です。
-必要な問題では`Python (PyPy 3.11-v7.3.20)`も選べます。
+サンプルテストは、既定で`Python (PyPy 3.11-v7.3.20)`を使います。
+必要な問題では`Python (CPython 3.13.7)`も選べます。
 各問題の解答と公式サンプルを`problems`にまとめています。
 
 ## 初回準備
@@ -33,10 +33,10 @@ A問題のサンプルテスト:
 .\scripts\test-samples.ps1 problems/ABC468/abc468-a
 ```
 
-PyPyで実行する場合:
+CPythonで実行する場合:
 
 ```powershell
-.\scripts\test-samples.ps1 problems/ABC468/abc468-a -Runtime PyPy
+.\scripts\test-samples.ps1 problems/ABC468/abc468-a -Runtime CPython
 ```
 
 解答前の空テンプレートは出力しないため、サンプルテストは`NG`になります。
@@ -60,9 +60,45 @@ uv run python -m unittest
 3. CPythonまたはPyPyのデバッグ構成を選ぶ
 4. 問題ディレクトリとサンプル番号を入力する
 
-既定は`.venv`のCPythonです。
+デバッグ構成は、`.venv-pypy`のPyPyを先頭に表示します。
 PyPy構成を選ぶと`.venv-pypy`で実行され、どちらもサンプルが自動入力されます。
 VS Codeには推奨拡張のPython、Pylance、Python Debugger、Ruffを入れてください。
+
+## Zed
+
+Zedでは、このリポジトリのルートをフォルダーとして開きます。
+初回はコマンドパレットの `task: spawn` から `AtCoder: 初回準備` を実行します。
+
+### タスク
+
+1. コマンドパレットで `task: spawn` を実行します。
+2. `AtCoder: サンプルテスト` を選びます。
+3. ターミナルで問題ディレクトリを入力します。
+4. ターミナルで `CPython` または `PyPy` を入力します。空欄では `PyPy` を使います。
+
+問題ディレクトリは、リポジトリのルートからの相対パスで指定します。
+タスクは、指定した問題の全サンプルを検証します。
+`AtCoder: Ruffチェック` は、プロジェクト全体を検証します。
+各タスクは、実行前に編集内容を保存します。
+
+### デバッグ
+
+1. 対象問題の `Main.py` を保存し、停止したい行にブレークポイントを置きます。
+2. `F4` を押します。
+3. `AtCoder: CPythonでデバッグ` または `AtCoder: PyPyでデバッグ` を選びます。
+4. ターミナルで問題ディレクトリとサンプル番号を入力します。
+
+問題ディレクトリは、リポジトリのルートからの相対パスで指定します。
+サンプル番号は `01` や `02` と入力します。空欄では `01` を使います。
+ランナーは、指定した問題の `samples/<サンプル番号>.in` を標準入力へ接続します。
+選択したファイルに関係なく、指定した問題のディレクトリで `Main.py` を実行します。
+Zedは、デバッグに必要な `debugpy` を自動で準備します。
+
+Zedでは、問題とサンプルの入力欄をターミナルに表示します。
+VS Codeでは、従来どおり専用の入力欄と選択肢を表示します。
+
+設定形式と操作の詳細は、Zed公式の[タスク](https://zed.dev/docs/tasks)と
+[Pythonデバッグ](https://zed.dev/docs/languages/python#debugging)を参照してください。
 
 ## 新しい問題を追加する
 

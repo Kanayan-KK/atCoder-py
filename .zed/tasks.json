@@ -1,0 +1,40 @@
+[
+  {
+    "label": "AtCoder: 初回準備",
+    "command": "powershell",
+    "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "$ZED_WORKTREE_ROOT/scripts/setup.ps1"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all"
+  },
+  {
+    "label": "AtCoder: Ruffチェック",
+    "command": "uv",
+    "args": [
+      "run",
+      "ruff",
+      "check",
+      "."
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all"
+  },
+  {
+    "label": "AtCoder: サンプルテスト",
+    "command": "powershell",
+    "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "$ZED_WORKTREE_ROOT/scripts/zed-test-samples.ps1"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all"
+  }
+]

@@ -2,22 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "AtCoder: CPythonでデバッグ",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/scripts/debug_problem.py",
-      "args": [
-        "${workspaceFolder}/${input:problem}/Main.py"
-      ],
-      "cwd": "${workspaceFolder}/${input:problem}",
-      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
-      "console": "integratedTerminal",
-      "stopOnEntry": false,
-      "env": {
-        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in"
-      }
-    },
-    {
       "name": "AtCoder: PyPyでデバッグ",
       "type": "debugpy",
       "request": "launch",
@@ -27,6 +11,22 @@
       ],
       "cwd": "${workspaceFolder}/${input:problem}",
       "python": "${workspaceFolder}/.venv-pypy/Scripts/python.exe",
+      "console": "integratedTerminal",
+      "stopOnEntry": false,
+      "env": {
+        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in"
+      }
+    },
+    {
+      "name": "AtCoder: CPythonでデバッグ",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/debug_problem.py",
+      "args": [
+        "${workspaceFolder}/${input:problem}/Main.py"
+      ],
+      "cwd": "${workspaceFolder}/${input:problem}",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
       "console": "integratedTerminal",
       "stopOnEntry": false,
       "env": {
